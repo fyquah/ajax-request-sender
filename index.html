@@ -1,8 +1,11 @@
 <html ng-app="app">
 <head>
   <meta charset='UTF-8'>
+  <!-- load CDN -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.1.1/angular.min.js"></script>
+
+  <link type="text/css" rel="stylesheet" href="style.css">
   <script src="scripts/global.js"></script>
   <script src="scripts/controller.js"></script>
   <script src="scripts/directive.js"></script>
@@ -36,8 +39,8 @@
       <button ng-click="addRequestParams()" onclick="return false">Add Request Parameter</button>
     </div>
     <button ng-click="submit()" onclick="return false">Submit</button>
-    <div>
-      <p ng-repeat="message in messages" ng-style="message.width_style()">{{ message.content }}</p>     
+    <div class="message-displayer">
+      <p ng-repeat="message in messages" ng-style="message.style()">{{ message.content }}</p>     
     </div>  
   </form> 
 </body>

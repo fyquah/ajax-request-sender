@@ -7,8 +7,10 @@ app.controller("senderCtrl" , function($http , $scope){
 		this.depth = depth || 0;
 	}
 
-	Message.prototype.width_style = function(){
-		return {"margin-left": (this.depth * $scope.indentWidth + "px")};
+	Message.prototype.style = function(){
+		return {
+			"margin-left": (this.depth * $scope.indentWidth + "px")
+		};
 	}
 
 	function outputMessages(obj , depth){
@@ -24,6 +26,10 @@ app.controller("senderCtrl" , function($http , $scope){
 		});
 	}
 
+	console.log = function(msg){
+		console.olog(msg);
+		outputMessages(new Message(msg , 0));
+	}
 
 	function submissionParameters(){
 		var return_obj = Object.create(null);
@@ -51,18 +57,18 @@ app.controller("senderCtrl" , function($http , $scope){
 
 
 	$scope.submit = function(){
+
+		// Insert custom validation here
 		var parameters = submissionParameters(); 
 		var url = $scope.requestUrl;
+		var requestType = $scope.requestType;
 
-		$scope.messages.push(new Message("Creating a request of the type " + $scope.requestType , 0));
-		$scope.messages.push(new Message("Your parameters are " + $scope.requestType , 0));
+		$scope.messages.push(new Message("Creating a request of the type " + requestType , 0));
+		$scope.messages.push(new Message("Your parameters are " + requestType , 0));
 		outputMessages(parameters, 0);
-		return;
-		console.log(submissionParameters());
-		console.log($scope.requestType);
 
 		var savePromise = null;
-		if($scope.requestType == "put" || $scope.requestType == "patch" || $scope.requestType == "post"){
+		if(requestType == "put" || requestType == "patch" || requestType == "post"){
 			savePromise = $http[$scope.requestType](url , parameters);
 		} else { // Non-data-sensitive methods
 			if(Object.keys(parameters).length != 0){
@@ -73,13 +79,13 @@ app.controller("senderCtrl" , function($http , $scope){
 					url += key + "=" + parameters[key];
 				});
 			}
-			savePromise = $http[$scope.requestType](url);
+			savePromise = $http[requestType](url);
 		}
 		savePromise.success = function(data){
-			$scope.results = data;
+			outputMessages(data);
 		}
 		savePromise.error = function(data){
-			$scope.results = data;
+			outputMessages(data);
 		}
 	}
 });
