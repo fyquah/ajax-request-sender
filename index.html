@@ -2,10 +2,17 @@
 <head>
   <meta charset='UTF-8'>
   <!-- load CDN -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.1.1/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.1/angular.min.js"></script>
+  <!--bootstrap css stuff-->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  <!-- end of bootstrap css -->
 
+  <base ng-href="window.location.href" />
   <link type="text/css" rel="stylesheet" href="style.css">
+  <!-- javascript libraries -->
   <script src="scripts/global.js"></script>
   <script src="scripts/factory.js"></script>
   <script src="scripts/service.js"></script>
@@ -13,8 +20,8 @@
   <script src="scripts/directive.js"></script>
 </head>
 <body>
-  <h1>Ajax request sender</h1>
   <div class='container' ng-app="app">
+    <h1>Ajax request sender</h1>
     <div class='row' ng-controller="senderCtrl">
       <div class='col-sm-6'>
         <form ng-init="initializeVariables()">
@@ -25,30 +32,39 @@
           </div>
           <div class='form-group'>
             <label for="requestUrl">Request URL</label>
-            <input required type="text" ng-model="requestUrl" />
+            <input required type="text" ng-model="requestUrl" class="form-control"/>
           </div>
           <div class='form-group'>
             <label for="indentWidth">Indentation width in pixels</label>
-            <input required type="text" ng-model="styleOptions.indentWidth" />
+            <input required type="text" ng-model="styleOptions.indentWidth" class="form-control"/>
           </div>
           <div class='form-group'>
           <label for="requestType">Request Type / HTTP Verb</label>
-            <select required ng-model='requestType'>
-              <option ng-repeat="x in possibleRequestTypes" value="{{ x }}" ng-bind="x.toUpperCase()"></option>
+            <select required ng-model='requestType' class="form-control">
+              <option ng-repeat="x in possibleRequestTypes" value="{{ x }}" ng-bind="x.toUpperCase()" class="form-control"></option>
             </select>
           </div>
           <div class='form-group'>
             <label for="requestParameters">Request parameters</label>
-            <ul>
-              <li ng-repeat="param in requestParameters">
-                <input placeholder="key of parameter" type="text" ng-model="param.key" focus-me="true" />
-                <input placeholder="value of parameter" type="text" ng-model="param.value" />
-                <button ng-click="removeRequestParams($index)">Delete Parameter</button>
-              </li> 
+            <ul style="padding-left : 0px">
+              <form class="form-inlines">
+                <li ng-repeat="param in requestParameters" style="list-style-type : none">
+                  <p>params {{ $index + 1 }}</p>
+                  <div class='form-group'>
+                    <input placeholder="key of parameter" type="text" ng-model="param.key" class="form-control form-inline"/>
+                  </div>
+                  <div class='form-group'>
+                    <input placeholder="value of parameter" type="text" ng-model="param.value" class="form-control form-inline"/>
+                  </div>
+                  <div class='form-group'>
+                    <button ng-click="removeRequestParams($index)" class="btn btn-danger">Delete Parameter</button>
+                  </div>
+                </li> 
+              </form>
             </ul>
-            <button ng-click="addRequestParams()" onclick="return false">Add Request Parameter</button>
+            <button ng-click="addRequestParams()" onclick="return false" class="btn btn-info" >Add Request Parameter</button>
           </div>
-          <button ng-click="submit()" onclick="return false">Submit</button>
+          <button ng-click="submit()" onclick="return false" class="btn btn-success">Submit</button>
           <div class="message-displayer">
             <p ng-repeat="message in messages" ng-style="message.style(styleOptions)">{{ message.toString() }}</p>     
           </div>  
