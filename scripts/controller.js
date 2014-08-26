@@ -1,4 +1,4 @@
-app.controller("senderCtrl" , ["$http" , "$scope" , "$requestService" , function($http , $scope , $requestService){
+app.controller("senderCtrl" , function($http , $scope, $requestService){
   $scope.possibleRequestTypes = $requestService.possibleRequestTypes;
   $scope.indentWidth = 20;
 
@@ -19,6 +19,24 @@ app.controller("senderCtrl" , ["$http" , "$scope" , "$requestService" , function
   }
 
   $scope.submit = function(){
-    $requestService.submitRequest();
+    var requestObj = {
+      requestUrl: $scope.requestUrl,
+      requestType: $scope.requestType,
+      requestParameters: $scope.requestParameters
+    };
+    $scope.errors = $requestService.validate(requestObj);
+    if($scope.errors.length === 0){
+      outputMessage($scope.messages , "sending a " + requestObj.requestType.toUpperCase() + " request to " + requestObj.requestUrl , 0);
+      outputMessage($scope.messages , "your request parameters are: " , 0);
+      outputMessage($scope.messages , requestObj.requestParameters , 0);
+      
+      var savePromise = $requestService.submitRequest(requestObj);
+      savePromise.success = function(data){
+        
+      };
+      savePromise.error = function(data){
+
+      };
+    }
   }
-}]);
+});

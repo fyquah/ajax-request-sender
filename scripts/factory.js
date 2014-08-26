@@ -18,18 +18,18 @@ app.factory("Message" , function(){
 });
 
 app.factory("outputMessage" , function(){
-	return function (obj , depth){
+	return function (scope , obj , depth){
 		depth = depth || 0;
     var terminating_types = ["string" , "number" , "array" , "function"];
 
     if(terminating_types.include(typeof obj)){
-      $scope.messages.push(new Message(obj , depth));
+      scope.push(new Message(obj , depth));
       return;
     }
 
     Object.keys(obj).forEach(function(key , index){
-      $scope.messages.push(new Message(key + " =>" , depth));
-      outputMessages(obj[key] , depth + 1);
+      scope.push(new Message(key + " =>" , depth));
+      outputMessages(scope , obj[key] , depth + 1);
     });
   };
 });

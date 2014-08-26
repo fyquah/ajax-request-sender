@@ -7,6 +7,6 @@ Array.prototype.include = function(term){
 	this.forEach(function(item){
 		if(item === term)
 			return true;
-	})
+	});
 	return false;
 }
