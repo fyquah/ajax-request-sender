@@ -20,8 +20,9 @@
   <script src="scripts/directive.js"></script>
 </head>
 <body>
-  <div id="spinner" class="spinner" ng-show="spinnerIsMoving">
-    <img id="img-spinner" src="assets/images/spinner.gif" alt="Loading"/>
+  <div class='big-dummy-background' ng-show="spinnerIsMoving"></div>
+  <div class="spinner" ng-show="spinnerIsMoving">
+    <img id="img-spinner" src="assets/images/spinner.gif" alt="Loading" style="border-radius : 20px" />
   </div>
   <div class='container' >
     <h1>Ajax request sender</h1>

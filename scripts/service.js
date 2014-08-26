@@ -1,12 +1,12 @@
-app.service("$spinner" , function(){
+app.service("$spinner" , ["$rootScope" , function($rootScope){
   this.stop = function(){
-    $rootScope.spinnerIsMoving = true;
+    $rootScope.spinnerIsMoving = false;
   };
 
   this.start = function(){
-    $rootScope.spinnerIsMoving = false;
+    $rootScope.spinnerIsMoving = true;
   };
-});
+}]);
 
 
 app.service("$requestService" , ["outputMessage" , "$http" , function(outputMessage , $http){
