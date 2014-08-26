@@ -31,17 +31,19 @@ app.controller("senderCtrl" , function($http , $scope, $requestService , outputM
     console.log(requestObj);
     $scope.errors = $requestService.validateRequest(requestObj);
     if($scope.errors.length === 0){
-      outputMessage($scope.messages , "sending a " + requestObj.requestType.toUpperCase() + " request to " + requestObj.requestUrl , 0);
-      outputMessage($scope.messages , "your request parameters are: " , 0);
+      outputMessage($scope.messages , requestObj.requestType.toUpperCase() + " " + requestObj.requestUrl , 0);
+      outputMessage($scope.messages , "parameters: " , 0);
       outputMessage($scope.messages , requestObj.requestParameters , 0);
       
       var savePromise = $requestService.submitRequest(requestObj);
-      savePromise.success = function(data){
-
-      };
-      savePromise.error = function(data){
-
-      };
+      savePromise.success(function(data){
+        console.log(data);
+        $scope.responseData = data;
+      });
+      savePromise.error(function(data){
+        console.log(data);
+        $scope.responseData = data;
+      });
     }
   }
 });

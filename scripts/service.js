@@ -43,6 +43,7 @@ app.service("$requestService" , ["outputMessage" , "$http" , function(outputMess
       }
       savePromise = $http[obj.requestType](obj.requestUrl);
     }
+    console.log(savePromise);
     return savePromise;
   };
 }]);
