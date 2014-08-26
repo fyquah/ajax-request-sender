@@ -38,14 +38,15 @@ app.controller("senderCtrl" , function($http , $scope, $requestService , outputM
         outputMessage($scope.messages , requestObj.requestParameters , 0);
       }
       var savePromise = $requestService.submitRequest(requestObj);
-      savePromise.success(function(data){
-        console.log(data);
-        $scope.responseData = data;
-      });
-      savePromise.error(function(data){
-        console.log(data);
-        $scope.responseData = data;
-      });
+      function responseAction(data, status, headers, config){
+        console.log("status");
+        console.log("headers");
+        console.log("config");
+        console.log("data");
+        responseData = data;
+      }
+      savePromise.success(responseAction);
+      savePromise.error(responseAction);
     }
   }
 });
