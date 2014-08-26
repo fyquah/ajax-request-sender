@@ -52,7 +52,6 @@ app.service("$requestService" , ["outputMessage" , "$http" , function(outputMess
       }
       obj.requestParameters = {}; // points to an empty object
     }
-    obj.requestUrl = escape(obj.requestUrl);
     return obj;
   }
 
