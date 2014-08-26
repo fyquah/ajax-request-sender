@@ -1,4 +1,4 @@
-<html>
+<html ng-app="app">
 <head>
   <meta charset='UTF-8'>
   <!-- load CDN -->
@@ -11,7 +11,7 @@
   <!-- end of bootstrap css -->
 
   <base ng-href="window.location.href" />
-  <link type="text/css" rel="stylesheet" href="style.css">
+  <link type="text/css" rel="stylesheet" href="assets/style.css">
   <!-- javascript libraries -->
   <script src="scripts/global.js"></script>
   <script src="scripts/factory.js"></script>
@@ -20,7 +20,10 @@
   <script src="scripts/directive.js"></script>
 </head>
 <body>
-  <div class='container' ng-app="app">
+  <div id="spinner" class="spinner" ng-show="spinnerIsMoving">
+    <img id="img-spinner" src="assets/images/spinner.gif" alt="Loading"/>
+  </div>
+  <div class='container' >
     <h1>Ajax request sender</h1>
     <div class='row' ng-controller="senderCtrl">
       <div class='col-sm-6'>

@@ -1,3 +1,14 @@
+app.service("$spinner" , function(){
+  this.stop = function(){
+    $rootScope.spinnerIsMoving = true;
+  };
+
+  this.start = function(){
+    $rootScope.spinnerIsMoving = false;
+  };
+});
+
+
 app.service("$requestService" , ["outputMessage" , "$http" , function(outputMessage , $http){
   var self = this;
   

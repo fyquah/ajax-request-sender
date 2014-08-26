@@ -1,0 +1,25 @@
+.message-displayer
+{
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.message-displayer > p
+{
+	margin-bottom: 2px;
+	margin-top: 2px;
+
+}
+
+.spinner {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-left: -50px; /* half width of the spinner gif */
+    margin-top: -50px; /* half height of the spinner gif */
+    text-align:center;
+    z-index: 9999;
+    overflow: auto;
+    width: 100px; /* width of the spinner gif */
+    height: 100px; /*hight of the spinner gif +2px to fix IE8 issue */
+}
