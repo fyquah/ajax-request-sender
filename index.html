@@ -77,15 +77,15 @@
                     <input placeholder="value of your parameter {{ $index + 1 }}" type="text" ng-model="param.value" class="form-control form-inline"/>
                   </div>
                   <div class='form-group'>
-                    <button ng-click="removeRequestParams($index)" class="btn btn-danger">Delete Parameter</button>
+                    <button ng-click="removeRequestParam($index)" class="btn btn-danger">Delete Parameter</button>
                   </div>
                 </form>
               </li> 
             </ul>
           </div>
           <button ng-click="submit()" onclick="return false" class="btn btn-success">Submit</button>
-          <button ng-click="addRequestParams()" onclick="return false" class="btn btn-info" style="margin-left : 10px">Add Request Parameter</button>  
-          <button ng-click="addRequestHeaders()" onclick="return false" class="btn btn-warning" style="margin-left : 10px">Add Request Header</button>  
+          <button ng-click="addRequestParam()" onclick="return false" class="btn btn-info" style="margin-left : 10px">Add Request Parameter</button>  
+          <button ng-click="addRequestHeader()" onclick="return false" class="btn btn-warning" style="margin-left : 10px">Add Request Header</button>  
         </form> 
       </div>
       <div class='col-sm-6'>

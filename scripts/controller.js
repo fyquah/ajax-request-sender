@@ -14,7 +14,7 @@ app.controller("senderCtrl" , [
   };
 
   // Headers
-  $scope.addRequestHeaders = function(){
+  $scope.addRequestHeader = function(){
     $scope.requestHeaders.push({
       key: "",
       value: ""
@@ -26,16 +26,16 @@ app.controller("senderCtrl" , [
   }
 
   // Params
-  $scope.addRequestParams = function(){
+  $scope.addRequestParam = function(){
     $scope.requestParameters.push({
       key: "",
       value: ""
     })
-  }
+  };
 
-  $scope.removeRequestParams = function(index){
+  $scope.removeRequestParam = function(index){
     $scope.requestParameters.splice(index , 1);
-  }
+  };
 
   $scope.submit = function(){
     var requestObj = {
@@ -67,5 +67,5 @@ app.controller("senderCtrl" , [
       savePromise.success(responseAction);
       savePromise.error(responseAction);
     }
-  }
+  };
 }]);

@@ -29,7 +29,7 @@ app.service("$requestService" , ["outputMessage" , "$http" , function(outputMess
     }
     
     return errors;
-  }
+  };
 
   self.compileParametersArray = function(arr){
     var obj = {};
@@ -37,7 +37,7 @@ app.service("$requestService" , ["outputMessage" , "$http" , function(outputMess
       obj[x.key] = x.value;
     });
     return obj;
-  }
+  };
 
   self.tidyUpRequest = function(obj){
     if(self.nonParameterRequest.include(obj.requestType)){
@@ -53,7 +53,7 @@ app.service("$requestService" , ["outputMessage" , "$http" , function(outputMess
       obj.requestParameters = {}; // points to an empty object
     }
     return obj;
-  }
+  };
 
   self.submitRequest = function(obj){
     var savePromise = null;
