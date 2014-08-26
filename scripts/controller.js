@@ -13,6 +13,15 @@ app.controller("senderCtrl" , [
     $scope.errors = [];
   }
 
+  // Headers
+  $scope.addRequestHeaders = function(){
+    $scope.requestHeaders.push({
+      key: "",
+      value: ""
+    });
+  }
+
+  // Params
   $scope.addRequestParams = function(){
     $scope.requestParameters.push({
       key: "",
