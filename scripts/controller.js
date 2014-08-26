@@ -13,8 +13,8 @@ app.controller("senderCtrl" , function($http , $scope, $requestService , outputM
 
   $scope.addRequestParams = function(){
     $scope.requestParameters.push({
-      key: "key",
-      value: "your value"
+      key: "",
+      value: ""
     })
   }
 
@@ -31,10 +31,12 @@ app.controller("senderCtrl" , function($http , $scope, $requestService , outputM
     console.log(requestObj);
     $scope.errors = $requestService.validateRequest(requestObj);
     if($scope.errors.length === 0){
+      $requestService.tidyUpRequest(requestObj);
       outputMessage($scope.messages , requestObj.requestType.toUpperCase() + " " + requestObj.requestUrl , 0);
-      outputMessage($scope.messages , "parameters: " , 0);
-      outputMessage($scope.messages , requestObj.requestParameters , 0);
-      
+      if(Object.keys(requestObj.requestParameters).length !== 0){
+        outputMessage($scope.messages , "parameters: " , 0);
+        outputMessage($scope.messages , requestObj.requestParameters , 0);
+      }
       var savePromise = $requestService.submitRequest(requestObj);
       savePromise.success(function(data){
         console.log(data);

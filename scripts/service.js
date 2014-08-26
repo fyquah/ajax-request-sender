@@ -1,7 +1,10 @@
 app.service("$requestService" , ["outputMessage" , "$http" , function(outputMessage , $http){
   var self = this;
   
-  // Privilleged methods
+  // Privilleged methods  
+  self.nonParameterRequest = ["get" , "delete"];
+  self.possibleRequestTypes = ["get" , "post" , "delete" , "put" , "patch" , "head" , "jsonp"];
+
   self.validateRequest = function(obj){
     var errors = [];
     // validates that request type is one of the given types
@@ -25,22 +28,28 @@ app.service("$requestService" , ["outputMessage" , "$http" , function(outputMess
     return obj;
   }
 
-  self.possibleRequestTypes = ["get" , "post" , "delete" , "put" , "patch" , "head" , "jsonp"];
+  self.tidyUpRequest = function(obj){
+    if(self.nonParameterRequest.include(obj.requestType)){
+      if(Object.keys(obj.requestParameters).length != 0){
+        obj.requestUrl += "?";
+        Object.keys(obj.requestParameters).forEach(function(key , index){
+          if(index != 0){
+            obj.requestUrl += "&";
+          }
+          obj.requestUrl += (key + "=" + obj.requestParameters[key]);
+        });
+      }
+      obj.requestParameters = {}; // points to an empty object
+    }
+    obj.requestUrl = escape(obj.requestUrl);
+    return obj;
+  }
 
   self.submitRequest = function(obj){
     var savePromise = null;
     if(obj.requestType == "put" || obj.requestType == "patch" || obj.requestType == "post"){
       savePromise = $http[obj.requestType](obj.requestUrl , obj.requestParameters);
     } else { 
-      // Need to use query strings for the following methods
-      if(Object.keys(obj.requestParameters).length != 0){
-        url += "?";
-        Object.keys(obj.requestParameters).forEach(function(key , index){
-          if(index != 0)
-            url += "&";
-          url += key + "=" + obj.requestParameters[key];
-        });
-      }
       savePromise = $http[obj.requestType](obj.requestUrl);
     }
     console.log(savePromise);

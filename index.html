@@ -46,15 +46,16 @@
           </div>
           <div class='form-group'>
             <label for="requestParameters">Request parameters</label>
+            <p>If your request does not permit the sending of any parameters (eg: GET / DELETE requet), your paramteres will be entered as a query string. Note, it will be escaped, eg: special characters will be converted to relevant hex code.</p>
             <ul style="padding-left : 0px">
               <form class="form-inlines">
                 <li ng-repeat="param in requestParameters" style="list-style-type : none">
                   <p>params {{ $index + 1 }}</p>
                   <div class='form-group'>
-                    <input placeholder="key of parameter" type="text" ng-model="param.key" class="form-control form-inline"/>
+                    <input placeholder="key of parameter" placeholder="key of your parameter" type="text" ng-model="param.key" class="form-control form-inline"/>
                   </div>
                   <div class='form-group'>
-                    <input placeholder="value of parameter" type="text" ng-model="param.value" class="form-control form-inline"/>
+                    <input placeholder="value of parameter" placeholder="value of your parameter" type="text" ng-model="param.value" class="form-control form-inline"/>
                   </div>
                   <div class='form-group'>
                     <button ng-click="removeRequestParams($index)" class="btn btn-danger">Delete Parameter</button>
