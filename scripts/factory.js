@@ -21,19 +21,20 @@ app.factory("Message" , function(){
 	return Message;
 });
 
-app.factory("outputMessage" , function(Message){
-	return function (scope , obj , depth){
-		depth = depth || 0;
-    var terminating_types = ["string" , "number" , "array" , "function"];
+app.factory("outputMessage" , [ "Message" , function(Message){
+  function outputMessage(scope , obj , depth){
+    depth = depth || 0;
+    var terminating_types = ["string" , "number" , "array" , "function" , "undefined"];
 
-    if(terminating_types.include(typeof obj)){
+    if(terminating_types.include(typeof obj) || obj == null){
       scope.push(new Message(obj , depth));
       return;
     }
 
     Object.keys(obj).forEach(function(key , index){
       scope.push(new Message(key + " =>" , depth));
-      outputMessages(scope , obj[key] , depth + 1);
+      outputMessage(scope , obj[key] , depth + 1);
     });
   };
-});
+	return outputMessage;
+}]);

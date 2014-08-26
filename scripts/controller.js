@@ -39,11 +39,13 @@ app.controller("senderCtrl" , function($http , $scope, $requestService , outputM
       }
       var savePromise = $requestService.submitRequest(requestObj);
       function responseAction(data, status, headers, config){
-        console.log("status");
-        console.log("headers");
-        console.log("config");
-        console.log("data");
-        responseData = data;
+        ["data" , "status" , "headers" , "config"].forEach(function(x){
+          console.log(eval(x));
+        });
+        outputMessage($scope.messages, { "STATUS" : status } , 0);
+        outputMessage($scope.messages, { "RESPONSE HEADERS": headers() } , 0);
+        outputMessage($scope.messages, { "CONFIG" : config } , 0);
+        outputMessage($scope.messages, { "DATA" : data } , 0);
       }
       savePromise.success(responseAction);
       savePromise.error(responseAction);

@@ -25,11 +25,6 @@
     <div class='row' ng-controller="senderCtrl">
       <div class='col-sm-6'>
         <form ng-init="initializeVariables()">
-          <div class='alert alert-danger' ng-show="errors">
-            <ul>
-              <li ng-repeat="err in errors">{{ err }}</li>
-            </ul>
-          </div>
           <div class='form-group'>
             <label for="requestUrl">Request URL</label>
             <input required type="text" ng-model="requestUrl" class="form-control"/>
@@ -65,14 +60,18 @@
             </ul>
             <button ng-click="addRequestParams()" onclick="return false" class="btn btn-info" >Add Request Parameter</button>
           </div>
-          <button ng-click="submit()" onclick="return false" class="btn btn-success">Submit</button>
-          <div class="message-displayer">
-            <p ng-repeat="message in messages" ng-style="message.style(styleOptions)">{{ message.toString() }}</p>     
-          </div>  
+          <button ng-click="submit()" onclick="return false" class="btn btn-success">Submit</button>  
         </form> 
       </div>
       <div class='col-sm-6'>
-        <div ng-bind="responseData"></div>
+        <div class='alert alert-danger' ng-show="errors">
+          <ul>
+            <li ng-repeat="err in errors">{{ err }}</li>
+          </ul>
+        </div>
+        <div class="message-displayer">
+          <p ng-repeat="message in messages" ng-style="message.style(styleOptions)">{{ message.toString() }}</p>     
+        </div>
       </div>
         
     </div>
