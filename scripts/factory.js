@@ -1,6 +1,6 @@
 app.factory("Message" , function(){
 	function Message(content , depth){
-    this.content = content || "ahhh, dummy message";
+    this.content = content;
     this.depth = depth || 0;
   };
 

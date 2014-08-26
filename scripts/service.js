@@ -56,13 +56,11 @@ app.service("$requestService" , ["outputMessage" , "$http" , function(outputMess
   };
 
   self.submitRequest = function(obj){
-    var savePromise = null;
-    if(obj.requestType == "put" || obj.requestType == "patch" || obj.requestType == "post"){
-      savePromise = $http[obj.requestType](obj.requestUrl , obj.requestParameters);
-    } else { 
-      savePromise = $http[obj.requestType](obj.requestUrl);
-    }
-    console.log(savePromise);
-    return savePromise;
+    return $http({
+      method: obj.requestType,
+      url: obj.requestUrl,
+      data: obj.requestParameters,
+      headers: obj.requestHeaders
+    });
   };
 }]);
