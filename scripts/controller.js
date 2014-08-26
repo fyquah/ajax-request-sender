@@ -11,7 +11,7 @@ app.controller("senderCtrl" , [
     $scope.requestHeaders = [];
     $scope.messages = [];
     $scope.errors = [];
-  }
+  };
 
   // Headers
   $scope.addRequestHeaders = function(){
@@ -19,6 +19,10 @@ app.controller("senderCtrl" , [
       key: "",
       value: ""
     });
+  };
+
+  $scope.removeRequestHeader = function(index){
+    $scope.requestHeaders.splice(index , 1);
   }
 
   // Params

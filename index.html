@@ -24,7 +24,7 @@
   <div class="spinner" ng-show="spinnerIsMoving">
     <img id="img-spinner" src="assets/images/spinner.gif" alt="Loading" style="border-radius : 20px" />
   </div>
-  <div class='container' >
+  <div class='container'>
     <h1>Ajax request sender</h1>
     <div class='row' ng-controller="senderCtrl">
       <div class='col-sm-6'>
@@ -66,7 +66,7 @@
           <div class='form-group'>
             <label for="requestParameters">Request parameters</label>
             <p>If your request does not permit the sending of any parameters (eg: GET / DELETE requet), your paramteres will be entered as a query string. Note, it will be escaped, eg: special characters will be converted to relevant hex code.</p>
-            <ul style="padding-left : 0px" ng-show="requestParameters">
+            <ul style="padding-left : 0px">
               <li ng-repeat="param in requestParameters" style="list-style-type : none">
                 <form class="form-inline">
                   <p>params {{ $index + 1 }}</p>
