@@ -51,10 +51,10 @@
                 <li ng-repeat="param in requestParameters" style="list-style-type : none">
                   <p>params {{ $index + 1 }}</p>
                   <div class='form-group'>
-                    <input placeholder="key of parameter" placeholder="key of your parameter" type="text" ng-model="param.key" class="form-control form-inline"/>
+                    <input placeholder="key of your parameter {{ $index + 1 }}" type="text" ng-model="param.key" class="form-control form-inline"/>
                   </div>
                   <div class='form-group'>
-                    <input placeholder="value of parameter" placeholder="value of your parameter" type="text" ng-model="param.value" class="form-control form-inline"/>
+                    <input placeholder="value of your parameter {{ $index + 1 }}" type="text" ng-model="param.value" class="form-control form-inline"/>
                   </div>
                   <div class='form-group'>
                     <button ng-click="removeRequestParams($index)" class="btn btn-danger">Delete Parameter</button>
@@ -62,9 +62,9 @@
                 </li> 
               </form>
             </ul>
-            <button ng-click="addRequestParams()" onclick="return false" class="btn btn-info" >Add Request Parameter</button>
           </div>
-          <button ng-click="submit()" onclick="return false" class="btn btn-success">Submit</button>  
+          <button ng-click="submit()" onclick="return false" class="btn btn-success">Submit</button>
+          <button ng-click="addRequestParams()" onclick="return false" class="btn btn-info" style="margin-left : 10px">Add Request Parameter</button>  
         </form> 
       </div>
       <div class='col-sm-6'>
