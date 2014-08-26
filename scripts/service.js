@@ -1,4 +1,4 @@
-app.service("$requestService" , ["outputMessage", "Message" , "$http" , function(outputMessage , Message , $http){
+app.service("$requestService" , ["outputMessage" , "$http" , function(outputMessage , $http){
   var self = this;
   
   // Privilleged methods
@@ -10,19 +10,27 @@ app.service("$requestService" , ["outputMessage", "Message" , "$http" , function
         errors.push("Please provide a value for " + prop);
       }
     });
-    if(possibleRequestTypes.include(obj.requestType) === false){
+    if(!self.possibleRequestTypes.include(obj.requestType)){
       errors.push("invalid request type given");
     }
     
     return errors;
   }
 
+  self.compileParametersArray = function(arr){
+    var obj = {};
+    arr.forEach(function(x){
+      obj[x.key] = x.value;
+    });
+    return obj;
+  }
+
   self.possibleRequestTypes = ["get" , "post" , "delete" , "put" , "patch" , "head" , "jsonp"];
 
   self.submitRequest = function(obj){
     var savePromise = null;
-    if(requestType == "put" || requestType == "patch" || requestType == "post"){
-      savePromise = $http[obj.requestType](url , parameters);
+    if(obj.requestType == "put" || obj.requestType == "patch" || obj.requestType == "post"){
+      savePromise = $http[obj.requestType](obj.requestUrl , obj.requestParameters);
     } else { 
       // Need to use query strings for the following methods
       if(Object.keys(obj.requestParameters).length != 0){
@@ -33,7 +41,7 @@ app.service("$requestService" , ["outputMessage", "Message" , "$http" , function
           url += key + "=" + obj.requestParameters[key];
         });
       }
-      savePromise = $http[requestType](url);
+      savePromise = $http[obj.requestType](obj.requestUrl);
     }
     return savePromise;
   };

@@ -4,9 +4,9 @@ console.olog = console.log;
 var app = angular.module("app" , []);
 
 Array.prototype.include = function(term){
-	this.forEach(function(item){
-		if(item === term)
+	for(var i = 0 ; i < this.length ; i++)
+		if(this[i] === term)
 			return true;
-	});
+		
 	return false;
 }
